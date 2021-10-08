@@ -5,8 +5,10 @@
 	//проверка данных авторизации
 	  function ValidData($login,$pass)
 	  {
-		$sql = "SELECT * FROM user WHERE login='$login' and pass='$pass'";
-		$result = mysqli_query($sql) or die(mysqli_error());
+	  	$son = new mysqli(HOST, USER, PASSWORD, NAME_BD);
+		$result = $son->query("SELECT * FROM user WHERE login='$login' and pass='$pass'");
+
+		
 		if(mysqli_num_rows($result))
 		    { 
 			$_SESSION["Auth"]=true;  

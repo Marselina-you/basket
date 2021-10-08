@@ -23,8 +23,8 @@ Error_Reporting(E_ALL & ~E_NOTICE);//не выводить предупрежд�
  define('PASSWORD', 'root');      //пароль
  define('NAME_BD', 'life');    //база mysql52.hoster.ru
  
-$connect = mysqli_connect(HOST, USER, PASSWORD, NAME_BD) or die ("Ошибка обращения к базе ".mysql_error());  ;
-mysqli_query($connect, "SET NAMES utf8") ;
+$son = mysqli_connect(HOST, USER, PASSWORD, NAME_BD) or die ("Ошибка обращения к базе ".mysql_error());  ;
+mysqli_query($son, "SET NAMES utf8") ;
 
 /*
   Автор: Авдеев Марк.
