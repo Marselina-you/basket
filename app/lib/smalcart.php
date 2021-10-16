@@ -36,7 +36,7 @@
 				foreach ($_SESSION['cart'] as $id=>$count){ // пробегаем по содержимому, вычилсяя сумму и количество
 
 					$son = new mysqli('localhost','root','root', 'life');
-		      $result = $son->query("SELECT p.price FROM product p WHERE id='{$id}'");
+		      $result = $son->query("SELECT p.price FROM product p WHERE id='{$id}'"); //d фигурных скобках задаются некоторые особые последовательности, 
 
 					
 					if($row = $result->fetch_assoc())

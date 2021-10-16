@@ -15,7 +15,7 @@
 				<br/>
 				<strong>На сумму:</strong>	<?=$smal_cart['cart_price']?> руб.	
 				<br/>
-				<a href=''>Оформить заказ</a>
+				<a href='/cart'>Оформить заказ</a>
 			</div>	
 			<div class="menu">
 				<?=$menu?>
