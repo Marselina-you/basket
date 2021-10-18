@@ -4,7 +4,7 @@
   {	  
 	  function getList()
 	  {  
-	  	 $son = new mysqli('localhost','root','root', 'life');
+	  	 $son = new mysqli(HOST, USER, PASSWORD, NAME_BD);
 		 $result = $son->query("SELECT * FROM product");
 		
 	
