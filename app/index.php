@@ -17,7 +17,9 @@ if(isset($member)) //если контролер вернул какието п�
 
     }
     
-    
+    if($_SESSION["Auth"] && $_SESSION["role"]=="1"){    
+        require_once "admin/adminbar.php";
+        }   
 require_once "function.php";//подключаем функционал сайта
 require_once "./template/index.php";//подключаем шаблон сайта 
 ?>
@@ -35,6 +37,13 @@ require_once "./template/index.php";//подключаем шаблон сайт
         <div class="d-flex flex-column col-lg-6">
             <h1>Дитя Солнца</h1>
             <h2>Ли Браскет</h2>
+
+            <?php
+            $rt = array('orange', 'banana', 'apple', 'peanapple', 'pumpkin');
+              
+$route=$rt[(count($rt)-1)];
+echo $route;
+            ?>
         </div>
     </div>
 </body>
