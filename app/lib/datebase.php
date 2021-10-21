@@ -3,26 +3,26 @@
 class Lib_DateBase {
 
 
-function query($query)
+function query($query) //РІС‹РїРѕР»РЅСЏРµС‚ РїРµСЂРµРґР°РЅРЅС‹Р№ Р·Р°РїСЂРѕСЃ , РїСЂРѕРіРѕРЅСЏСЏ С‡РµСЂРµР· mysql_real_escape_string() РїРѕР»СѓС‡РµРЅРЅС‹Рµ СЃРѕ СЃС‚РѕСЂРѕРЅС‹ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РїР°СЂР°РјРµС‚СЂС‹;
 {
 
-//func_num_args -  Возвращает количество аргументов, переданных функции
+//func_num_args -  Р’РѕР·РІСЂР°С‰Р°РµС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ Р°СЂРіСѓРјРµРЅС‚РѕРІ, РїРµСЂРµРґР°РЅРЅС‹С… С„СѓРЅРєС†РёРё
 
 	if(($num_args = func_num_args()) > 1){
 		$arg  = func_get_args();
 		unset($arg[0]);
-		//Выводит значения массива args, отформатированные в соответствии с аргументом format, 
+		//Р’С‹РІРѕРґРёС‚ Р·РЅР°С‡РµРЅРёСЏ РјР°СЃСЃРёРІР° args, РѕС‚С„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРЅС‹Рµ РІ СЃРѕРѕС‚РІРµС‚СЃС‚РІРёРё СЃ Р°СЂРіСѓРјРµРЅС‚РѕРј format,
 		
 		
 		foreach($arg as $argument=>$value){
-			$arg[$argument]=mysql_real_escape_string($value); // экранируем кавычки для всех входных параметров
+			$arg[$argument]=mysql_real_escape_string($value); // СЌРєСЂР°РЅРёСЂСѓРµРј РєР°РІС‹С‡РєРё РґР»СЏ РІСЃРµС… РІС…РѕРґРЅС‹С… РїР°СЂР°РјРµС‚СЂРѕРІ
 		}
 
 		$query = vsprintf($query,$arg);	
 
 	}
 
-	$sql = mysql_query($query);
+	$sql = mysqli_query($query);
 	
 	if(preg_match('`^(INSERT|UPDATE|DELETE|REPLACE)`i',$query,$null)){
 		if($this->affected_rows($sql)){
@@ -52,27 +52,27 @@ function build_query($query,$array,$_devide = ',')
 }
 
 
-//mysql_fetch_object- Обрабатывает ряд результата запроса и возвращает объект
+//mysql_fetch_object- РћР±СЂР°Р±Р°С‚С‹РІР°РµС‚ СЂСЏРґ СЂРµР·СѓР»СЊС‚Р°С‚Р° Р·Р°РїСЂРѕСЃР° Рё РІРѕР·РІСЂР°С‰Р°РµС‚ РѕР±СЉРµРєС‚
 function fetch_object($object)
 {
-	return @mysql_fetch_object($object);
+	return @mysqli_fetch_object($object);
 }
 
-//mysql_num_rows() возвращает количество рядов результата запроса.
+//mysql_num_rows() РІРѕР·РІСЂР°С‰Р°РµС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ СЂСЏРґРѕРІ СЂРµР·СѓР»СЊС‚Р°С‚Р° Р·Р°РїСЂРѕСЃР°.
 function num_rows($object)
 {
-	return @mysql_numrows($object);
+	return @mysqli_numrows($object);
 }
  
-//mysql_affected_rows() возвращает количество рядов, затронутых последним INSERT, UPDATE, DELETE запросом к серверу, на который ссылается указатель link_identifier.
+//mysql_affected_rows() РІРѕР·РІСЂР°С‰Р°РµС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ СЂСЏРґРѕРІ, Р·Р°С‚СЂРѕРЅСѓС‚С‹С… РїРѕСЃР»РµРґРЅРёРј INSERT, UPDATE, DELETE Р·Р°РїСЂРѕСЃРѕРј Рє СЃРµСЂРІРµСЂСѓ, РЅР° РєРѕС‚РѕСЂС‹Р№ СЃСЃС‹Р»Р°РµС‚СЃСЏ СѓРєР°Р·Р°С‚РµР»СЊ link_identifier.
 function affected_rows($object)
 {
-	return mysql_affected_rows();
+	return mysqli_affected_rows();
 }
 
-//mysql_insert_id -  Возвращает ID, сгенерированный при последнем INSERT-запросе.
+//mysql_insert_id -  Р’РѕР·РІСЂР°С‰Р°РµС‚ ID, СЃРіРµРЅРµСЂРёСЂРѕРІР°РЅРЅС‹Р№ РїСЂРё РїРѕСЃР»РµРґРЅРµРј INSERT-Р·Р°РїСЂРѕСЃРµ.
 function insert_id()
 {
-	return mysql_insert_id();
+	return mysqli_insert_id();
 }
 }
