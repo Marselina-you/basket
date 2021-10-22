@@ -2,7 +2,13 @@
 
 class Lib_DateBase {
 
-
+private static $instance; //(ýêçåìïëÿð îáúåêòà) Çàùèùàåì îò ñîçäàíèÿ ÷åðåç new Singleton
+	
+public static function getInstance() {//Âîçâðàùàåò åäèíñòâåííûé ýêçåìïëÿð êëàññà
+		if (!is_object(self::$instance)) self::$instance = new self;
+		return self::$instance;
+    }
+	 
 function query($query) //выполняет переданный запрос , прогоняя через mysql_real_escape_string() полученные со стороны пользователя параметры;
 {
 
@@ -15,14 +21,14 @@ function query($query) //выполняет переданный запрос , 
 		
 		
 		foreach($arg as $argument=>$value){
-			$arg[$argument]=mysql_real_escape_string($value); // экранируем кавычки для всех входных параметров
+			$arg[$argument]=$value->mysqli_real_escape_string; // экранируем кавычки для всех входных параметров
 		}
 
 		$query = vsprintf($query,$arg);	
 
 	}
 
-	$sql = mysqli_query($query);
+	$sql = $query->mysqli_query;
 	
 	if(preg_match('`^(INSERT|UPDATE|DELETE|REPLACE)`i',$query,$null)){
 		if($this->affected_rows($sql)){
@@ -61,7 +67,7 @@ function fetch_object($object)
 //mysql_num_rows() возвращает количество рядов результата запроса.
 function num_rows($object)
 {
-	return @mysqli_numrows($object);
+	return @mysqli_num_rows($object);
 }
  
 //mysql_affected_rows() возвращает количество рядов, затронутых последним INSERT, UPDATE, DELETE запросом к серверу, на который ссылается указатель link_identifier.

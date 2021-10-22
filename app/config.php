@@ -15,20 +15,30 @@ Error_Reporting(E_ALL & ~E_NOTICE);//не выводить предупрежд�
   exit;
   }
  }
- //константы для подключения к базе данных
-
  define('PATH_SITE', $_SERVER['DOCUMENT_ROOT']);    //сервер
- define('HOST', 'localhost');     //сервер
- define('USER', 'root');      //пользователь
- define('PASSWORD', 'root');      //пароль
- define('NAME_BD', 'life');    //база mysql52.hoster.ru
- 
-$son = mysqli_connect(HOST, USER, PASSWORD, NAME_BD) or die ("Ошибка обращения к базе ".mysqli_error());  ;
-mysqli_query($son, "SET NAMES utf8") ;
+ require_once "./setting_sql.php"; //файл настроек
 
-/*
-  Автор: Авдеев Марк.
-  e-mail: mark-avdeev@mail.ru
-  blog: lifeexample.ru
-*/
+ function put($filename,$content,$mode = 'w+')
+{
+    if (!$handle = fopen($filename, $mode)) {
+        return false;
+    }
+
+    if (fwrite($handle, $content) === false) {
+      fclose($handle);
+    return false;
+    }
+
+    fclose($handle);
+  return true;
+}
+
+function loger($text, $mode = 'a')
+{ 
+
+  $filename = "log_".date("Y_m_d").".txt";
+  $string = date("d.m.Y H:i:s")." => $text"."\n";
+  put($filename, $string, $mode);
+  return true;
+}
 ?>
