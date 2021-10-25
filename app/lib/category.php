@@ -7,12 +7,12 @@
 	protected static $instance; //(экземпляр объекта) Защищаем от создания через new Singleton
 	
 	//получаем таблицу категорий из БД, записываем в массив, для дальнейшей работы
-	private function __construct() {   //конструктор, который полуает из БД таблицу категорий и сохраняет ее для дальнейшей работы;
-		
-		$result = parent::query("SELECT * FROM  `category` ORDER BY sort "); //parent —ключевое слово, которое используется в дочернем классе для доступа к методу родительского класса.
+	private function __construct() {
+		$son = new mysqli(HOST, USER, PASSWORD, NAME_BD);
+		$result = $son->query("SELECT * FROM  `category` ORDER BY sort ");
 		if(parent::num_rows($result))
 		{
-			while ($row = parent::fetch_assoc($result))
+			while ($row = $result->fetch_assoc())
 			{		
 					$this->categories[]=$row; 
 			}
@@ -59,11 +59,11 @@
 		//создает новую категорию.
 	public function  delCategory($id)
 	{		
-		if(parent::query("DELETE FROM category WHERE id = %d",$id)){
+		if(parent::query("DELETE FROM category WHERE id = %d", $id)){
 		return true;
 		}
 		return	false;
-		
+		 
 	}
 	
 	
@@ -74,6 +74,8 @@
 	 foreach($this->categories as $category){
 	 		
 		 if($category["parent"]==$parent){
+		 
+
 			$print.='
 			<li><a href="/'.$category['url'].'">'.$category['title'].'</a>';
 			
@@ -103,7 +105,10 @@
 	
 	//возвращает список только id всех вложеных категорий.
 	public function  getCategoryList($parent=0)
-	{		
+
+	{		echo  is_array($category) ?  'Массив' : 'Не';
+	echo $category;
+
 		foreach($this->categories as $category){	 		
 		 if($category["parent"]==$parent){		
 					$this->list_category_id[]=$category['id'];

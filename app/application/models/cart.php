@@ -1,16 +1,19 @@
 <?php
  class Application_Models_Cart
   {	  
-	  function addToCart($id, $count=1)
-	  {	  	  
-		 $_SESSION['cart'][$id]=$_SESSION['cart'][$id]+$count;		
+	  function addToCart($id, $count=1)// доавляет в корзину товар
+	  {
+		$_SESSION['cart'][$id]=$_SESSION['cart'][$id]+$count;		
 		return true;
 	  }	  
 	  
 	  function getListItemId() // возвращает список id продуктов из корзины
 	  {	  	  		 
-		$listId=array_keys($_SESSION['cart']);
-		return $listId;	
+		if (!empty($_SESSION['cart'])){
+			$listId=array_keys($_SESSION['cart']);
+			return $listId;	
+		}
+		return false;	
 	  }	  
 	  
 	  function getTotalSumm() // возвращает иготовую сумму корзины
@@ -33,6 +36,7 @@
 	 function clearCart(){
     unset($_SESSION['cart']);
   }
+
 	  
 	  // обновляет содержимое корзины
 	  function refreshCart($array_product_id){ // получает ассоциативный массив id=>count
@@ -52,13 +56,17 @@
     if($_SESSION['cart']) return true; 
     else return false;
     }
-	  
+
 	  // возвращает html код корзины
 	  function printCart()
 	  {	  	  
-		$array_product_id=$this->getListItemId(); // получает список id
+		$array_product_id=array();
+		$product_positions=array();
 		
+		$array_product_id=$this->getListItemId(); // получает список id
+	
 		$item_position = new Application_Models_Product();	// создаем модель для работы с продуктами	
+		if (!empty($array_product_id))
 		foreach($array_product_id as $id){
 			$product_positions[]=$item_position->getProduct($id); // заполняем массив информацией о каждом продукте
 		}	
@@ -83,4 +91,3 @@
 		return $table_cart;
 	  }	  
   } 
-   

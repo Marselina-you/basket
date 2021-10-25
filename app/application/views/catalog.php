@@ -1,5 +1,6 @@
-h1>Каталог</h1>
+<h1><?=$TiteCategory?></h1>
 <?
+
 //представление каталога (страница каталога)
 foreach($Items as $item)
 		{
@@ -8,10 +9,10 @@ foreach($Items as $item)
 			<?endif;?>
 			<div class="product">
 				<div class="product_image">
-					<a href="/product/<?=$item["url"]?>"><image src="/images/<?=$item["id"]?>.jpg" /></a>
+					<a href="/<?=$item["category_url"]?>/<?=$item["product_url"]?>"><image src="/uploads/<?=$item["image_url"]?>" /></a>
 				</div>
 				<h2>
-				<a href="/product/<?=$item["url"]?>"><?=$item["name"]?></a>
+				<a href="/<?=$item["category_url"]?>/<?=$item["product_url"]?>"><?=$item["name"]?></a>
 				</h2>
 				<div class="product_price">
 				<?=$item["price"]?> руб.
@@ -26,4 +27,6 @@ foreach($Items as $item)
 		<?
 			$i++;
 		}
+		
+		echo $pager;
 		?>

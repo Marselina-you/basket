@@ -43,6 +43,14 @@ require_once "./template/index.php";//подключаем шаблон сайт
               
 $route=$rt[(count($rt)-1)];
 echo $route;
+$son = new mysqli('localhost','root','root', 'burrito');
+            $select1 = $son->query("SELECT   types_id, types   FROM categories ");
+            while($info = $select1->fetch_array()){
+           
+               echo'<div class="block-product-right d-flex flex-column  col-xl-4 col-lg-4 col-md-12 col-sm-12 justify-content-center">
+                        <div class="block-product-right-title d-flex justify-content-center align-items-center">
+                            <div class="block-product-right-title__name whitecolor fontSans size22px"><a href="/category/'.$info['types_id'].'">'.$info['types'].'</a></div>';
+                        }
             ?>
         </div>
     </div>
