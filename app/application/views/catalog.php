@@ -9,10 +9,10 @@ foreach($Items as $item)
 			<?endif;?>
 			<div class="product">
 				<div class="product_image">
-					<a href="/<?=$item["category_url"]?>/<?=$item["product_url"]?>"><image src="/uploads/<?=$item["image_url"]?>" /></a>
+					<a href="/product/<?=$item["url"]?>"><image src="/images/<?=$item["id"]?>.jpg" /></a>
 				</div>
 				<h2>
-				<a href="/<?=$item["category_url"]?>/<?=$item["product_url"]?>"><?=$item["name"]?></a>
+				<a href='/<?=$item["url"]?>/<?=$item["url"]?>'><?=$item["url"]?></a>
 				</h2>
 				<div class="product_price">
 				<?=$item["price"]?> руб.
@@ -28,5 +28,5 @@ foreach($Items as $item)
 			$i++;
 		}
 		
-		echo $pager;
+		
 		?>

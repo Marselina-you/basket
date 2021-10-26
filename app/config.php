@@ -20,26 +20,3 @@
  
  
  
-function put($filename,$content,$mode = 'w+')
-{
-    if (!$handle = fopen($filename, $mode)) {
-        return false;
-    }
-
-    if (fwrite($handle, $content) === false) {
-         fclose($handle);
-      return false;
-    }
-
-      fclose($handle);
-   return true;
-}
-
-function loger($text, $mode = 'a')
-{  
-
-   $filename = "log_".date("Y_m_d").".txt";
-   $string = date("d.m.Y H:i:s")." => $text"."\n";
-   put($filename, $string, $mode);
-   return true;
-}

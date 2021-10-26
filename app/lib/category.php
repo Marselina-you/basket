@@ -9,7 +9,7 @@
 	//получаем таблицу категорий из БД, записываем в массив, для дальнейшей работы
 	private function __construct() {
 		$son = new mysqli(HOST, USER, PASSWORD, NAME_BD);
-		$result = $son->query("SELECT * FROM  `category` ORDER BY sort ");
+		$result = $son->query("SELECT * FROM category ORDER BY sort");
 		if(parent::num_rows($result))
 		{
 			while ($row = $result->fetch_assoc())
@@ -81,7 +81,7 @@
 			
 			foreach($this->categories as $sub_category){ 
 		
-				 if($sub_category["parent"]==$category['id']){
+				 if($sub_category['parent']==$category['id']){
 					$flag=true;
 					break;
 				 }
@@ -106,13 +106,13 @@
 	//возвращает список только id всех вложеных категорий.
 	public function  getCategoryList($parent=0)
 
-	{		echo  is_array($category) ?  'Массив' : 'Не';
-	echo $category;
+	{		echo  is_array($category) ?  'Массив' : 'Не Массив';
+	
 
 		foreach($this->categories as $category){	 		
 		 if($category["parent"]==$parent){		
 					$this->list_category_id[]=$category['id'];
-					$this->getCategoryList($category["id"]);						
+					$this->getCategoryList($category['id']);						
 			}	
 		}
 

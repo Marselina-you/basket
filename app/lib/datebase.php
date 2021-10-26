@@ -30,7 +30,7 @@ function query($query) //выполняет переданный запрос , 
 
 	$sql = $query->mysqli_query;
 	
-	if(preg_match('`^(INSERT|UPDATE|DELETE|REPLACE)`i',$query,$null)){
+	if(preg_match('`^(INSERT|UPDATE|DELETE|REPLACE)`i',$null,$query)){
 		if($this->affected_rows($sql)){
 			return $sql;
 		}		

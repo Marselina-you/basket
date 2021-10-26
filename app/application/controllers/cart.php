@@ -1,7 +1,7 @@
 <?php
   class Application_Controllers_Cart extends Lib_BaseController
   {
-     function __construct()
+     function index()
 	 {
 			$model=new Application_Models_Cart;	
 			

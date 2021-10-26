@@ -4,6 +4,8 @@
   {
      function index()
 	 {
+
+	 
 		//если пришли данные логин и пароль, создаем модель проверки авторизации и передаем в нее данные.
 		if($_REQUEST['login']||$_REQUEST['pass']){		
 			$model=new Application_Models_Auth;
@@ -15,6 +17,8 @@
 			$this->login=$resultValid['login'];
 			$this->pass=$resultValid['pass'];
 			
+			if($_REQUEST['location']) header('Location: '.$_REQUEST['location']);
+			
 		}
 		else 
 			if($_SESSION["Auth"])$this->unVisibleForm=true;	//Если пользователь уже авторизован, не будем выводить ему форму авторизации
@@ -23,6 +27,7 @@
 		if($_REQUEST['out']=="1"){
 			$_SESSION["Auth"]=false;
 			$_SESSION["User"]="";
+			$_SESSION["role"]="";
 			$this->unVisibleForm=false;
 		}
 

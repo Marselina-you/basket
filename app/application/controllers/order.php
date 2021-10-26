@@ -1,7 +1,7 @@
 <?php
   class Application_Controllers_Order extends Lib_BaseController
   {  
-    function index()
+    function __construct()
 	 {				
 		$this->dislpay_form = true; // показывать форму ввода данных
 			if(isset($_REQUEST["to_order"])){  // если пришли данные с формы
